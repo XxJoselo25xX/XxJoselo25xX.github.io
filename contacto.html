@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de la Empresa</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spicy</h1>
+        <p>Teléfono: <a href="tel:5613539176">5613539176</a></p>
+        <p>Correo Electrónico: <a href="mailto:Spicy123@gmail.com">Spicy123@gmail.com</a></p>
+        <p>Dirección: Av Telecomunicaciones, Chinam Pac de Juárez, Iztapalapa, 09208 Ciudad de México, CDMX</p>
+        <div id="map" style="height: 400px; width: 100%;"></div>
+
+        <script>
+            function initMap() {
+                var empresaLocation = { lat: 19.3803198, lng: -99.0554871 }; // Coordenadas de la empresa
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: empresaLocation
+                });
+                var marker = new google.maps.Marker({
+                    position: empresaLocation,
+                    map: map,
+                    title: 'Ubicación de la Empresa'
+                });
+            }
+        </script>
+        <!-- Incluir la API de Google Maps -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=6698d8fe-e239-4f4d-9363-641e5aa21f71&callback=initMap"></script>
+    </div>
+</body>
+</html>
+

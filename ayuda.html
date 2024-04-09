@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Contacto</title>
+  <style>
+    /* Estilos opcionales para mejorar la apariencia */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    #enviado {
+      display: none;
+      background-color: #dff0d8;
+      color: #3c763d;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Ayuda de Spicy</h2>
+  <form id="formulario" action="#" method="post">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="email">Correo Electrónico:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="mensaje">Mensaje:</label>
+    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+    <input type="submit" value="Enviar">
+  </form>
+  <div id="enviado">Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.</div>
+</div>
+
+<script>
+  document.getElementById("formulario").addEventListener("submit", function(event){
+    event.preventDefault();
+    enviarCorreo();
+    document.getElementById("formulario").style.display = "none";
+    document.getElementById("enviado").style.display = "block";
+  });
+
+  function enviarCorreo() {
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const mensaje = document.getElementById('mensaje').value;
+
+    // Utiliza fetch para enviar una solicitud POST al servidor
+    fetch('/enviar-correo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nombre, email, mensaje }),
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Correo enviado exitosamente');
+      } else {
+        console.error('Error al enviar el correo');
+      }
+    })
+    .catch(error => {
+      console.error('Error de red:', error);
+    });
+  }
+</script>
+
+</body>
+</html>
